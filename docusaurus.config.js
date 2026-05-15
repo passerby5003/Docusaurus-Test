@@ -29,6 +29,7 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'passerby5003', // Usually your GitHub org/user name.
   projectName: 'devblog', // Usually your repo name.
+  // deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'throw',
 
@@ -65,7 +66,19 @@ const config = {
       }),
     ],
   ],
+  plugins:[
+    [
+          require.resolve("@easyops-cn/docusaurus-search-local"),
+      ({
+        // ... Your options.
+        // `hashed` is recommended as long-term-cache of index file is possible.
+        hashed: true,
 
+        // For Docs using Chinese, it is recomended to set:
+        // language: ["en", "zh"],
+      }),
+    ],
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
