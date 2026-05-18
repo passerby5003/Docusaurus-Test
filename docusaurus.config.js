@@ -124,8 +124,8 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: '微博',
+                href: 'https://weibo.com/u/7368703247',
               },
               {
                 label: 'BiliBili',

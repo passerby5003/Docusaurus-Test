@@ -5,30 +5,28 @@ import styles from './styles.module.css';
 const FeatureList = [
   {
     title: '简单展示',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('@site/static/img/hot-air-balloon.svg').default,
     description: (
       <>
-        完整介绍了项目的结构，项目的设计思路，以及API文档
+        完整介绍了项目的结构，项目的设计思路，以及API文档，阅读轻松愉快
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: '框架使用方法API文档',
+    Svg: require('@site/static/img/com-laptop-code.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        整理了框架的使用方法，API文档，和一些使用技巧，方便快速上手
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: '记录开发日志',
+    Svg: require('@site/static/img/cha-cloud.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        记录开发过程中的心路历程和遇到的各种问题，随着项目推进随时更新
       </>
     ),
   },
