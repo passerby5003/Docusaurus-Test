@@ -37,8 +37,14 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans', 'en'],
+    localeConfigs:{
+      en: {
+        htmlLang: 'en-GB',
+        label: 'English',
+      },
+    }
   },
 
   presets: [
@@ -98,9 +104,15 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: '说明文档',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/blog', label: '博客', position: 'left'},
+          {
+            type: 'docSidebar',
+            sidebarId: 'api',
+            position: 'left',
+            label: 'API文档',
+          },
           {
             href: 'https://github.com/passerby5003',
             position: 'right',
@@ -113,6 +125,10 @@ const config = {
             className: "header--bilibili-link",
             "aria-label": "BiliBili space",
           },
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          }
         ],
       },
       footer: {
@@ -122,13 +138,17 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: '说明文档',
                 to: '/docs/intro',
               },
+              {
+                label: 'API',
+                to: '/API/intro',
+              }
             ],
           },
           {
-            title: 'Community',
+            title: '社交媒体',
             items: [
               {
                 label: '微博',
@@ -145,10 +165,10 @@ const config = {
             ],
           },
           {
-            title: 'More',
+            title: '其他链接',
             items: [
               {
-                label: 'Blog',
+                label: '博客',
                 to: '/blog',
               },
               {

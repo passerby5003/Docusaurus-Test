@@ -1,0 +1,22 @@
+{
+  "title": {
+    "message": "DevBlog",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Icon",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.说明文档": {
+    "message": "Reference Docs",
+    "description": "Navbar item with label 说明文档"
+  },
+  "item.label.博客": {
+    "message": "Blog",
+    "description": "Navbar item with label 博客"
+  },
+  "item.label.API文档": {
+    "message": "APIs",
+    "description": "Navbar item with label API文档"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Tutorial - Basics": {
+    "message": "Tutorial - Basics",
+    "description": "The label for category 'Tutorial - Basics' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Tutorial - Basics.link.generated-index.description": {
+    "message": "5 minutes to learn the most important Docusaurus concepts.",
+    "description": "The generated-index page description for category 'Tutorial - Basics' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Project description": {
+    "message": "Project description",
+    "description": "The label for category 'Project description' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Project description.link.generated-index.description": {
+    "message": "Learn how to write a good project description and README file.",
+    "description": "The generated-index page description for category 'Project description' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.api": {
+    "message": "api",
+    "description": "The label for category 'api' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.UI": {
+    "message": "UI",
+    "description": "The label for category 'UI' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.api.category.UI": {
+    "message": "UI",
+    "description": "The label for category 'UI' in sidebar 'api'"
+  }
+}

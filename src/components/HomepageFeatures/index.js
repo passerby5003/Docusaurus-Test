@@ -2,31 +2,33 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
+import Translate, {translate} from '@docusaurus/Translate';
+
 const FeatureList = [
   {
-    title: '简单展示',
+    title: <Translate>简单展示</Translate>,
     Svg: require('@site/static/img/hot-air-balloon.svg').default,
     description: (
       <>
-        完整介绍了项目的结构，项目的设计思路，以及API文档，阅读轻松愉快
+       <Translate>完整介绍了项目的结构，项目的设计思路，以及API文档，阅读轻松愉快</Translate>
       </>
     ),
   },
   {
-    title: '框架使用方法API文档',
+    title: <Translate>框架使用方法API文档</Translate>,
     Svg: require('@site/static/img/com-laptop-code.svg').default,
     description: (
       <>
-        整理了框架的使用方法，API文档，和一些使用技巧，方便快速上手
+        <Translate>整理了框架的使用方法，API文档，和一些使用技巧，方便快速上手</Translate>
       </>
     ),
   },
   {
-    title: '记录开发日志',
+    title: <Translate>记录开发日志</Translate>,
     Svg: require('@site/static/img/cha-cloud.svg').default,
     description: (
       <>
-        记录开发过程中的心路历程和遇到的各种问题，随着项目推进随时更新
+        <Translate>记录开发过程中的心路历程和遇到的各种问题，随着项目推进随时更新</Translate>
       </>
     ),
   },

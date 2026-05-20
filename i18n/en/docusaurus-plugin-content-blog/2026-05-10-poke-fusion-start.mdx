@@ -1,0 +1,143 @@
+---
+title: Poke Fusion Reversal Poker Design Kicks Off!
+authors: [rarick]
+tags: [pokefusion]
+---
+
+# Poker Fusion: Poke Fusion
+Today (May 10, 2026), the design of `Poker Fusion` has officially begun!
+
+{/* truncate */}
+
+## Game Design Concept
+The game is a Slay the Spire + Bad North-style roguelike deck-building and card game, incorporating the art style design of Dicey Dungeons (of course, with some gameplay references as well)!
+Like other roguelike games, once a path is chosen on the map, players must follow it to the end. There may be a few forks along the way that allow players to switch routes, offering a chance to adjust,
+but these forks are rare. Therefore, it is crucial to plan the route carefully in the early stages.
+
+## Game Modes
+The game has two modes: Story mode and Roguelike mode. Story mode focuses on gameplay and narrative, with lower difficulty, suitable for beginners and players seeking a relaxed experience.
+Roguelike mode is as challenging as Slay the Spire.
+Before selecting this mode, a pop-up window should appear, asking the player to confirm their choice and warning them that this mode is difficult, recommending they play through the story mode first.
+
+## Game Content
+The game features a deck of 56 cards (equivalent to a standard deck of playing cards):
+- Spades ♠️ are attack-type cards, the best hand cards for direct damage output;
+- Clubs ♣️ are mainly for stacking damage over time (DoT), with attack as a secondary function;
+- Diamonds ♦️ focus on defensive cards that can strengthen shields or enhance effects after the shield breaks;
+- Hearts ♥️ are centered around healing, serving as lifesaving cards for the player.
+
+## Card Combinations
+Since the game is based on a deck of playing cards, combinations are a must! Below are the different types of combinations inspired by poker:
+
+### Single Card
+- **Any Suit**
+  The most basic effect:
+  - For attack cards: Deal 1 damage to the nearest enemy.
+  - For shield cards: Gain 1 shield.
+  - For DoT cards: Deal 1 damage to the enemy at the end of the turn.
+  - For healing cards: Restore 1 health point.
+
+### Pair (Two Cards of the Same Rank)
+- The effect is doubled (multiplier: **2**) based on the base effect of a single card.
+
+:::tip[Note]
+Since two cards cannot have the same suit (unless they are wild cards or jokers, but such combinations do not trigger additional effects), the two cards will always have different suits.
+:::
+
+### Three-of-a-Kind
+- **Sequential Ranks (e.g., 1-2-3)**
+  Non-sequential ranks (e.g., 1-3-5 or 2-4-6) will be discussed later.
+  For **sequential ranks**, there are three possible suit combinations:
+  1. All three cards have the same suit.
+  2. Two cards share the same suit, and the third has a different suit.
+  3. All three cards have different suits.
+
+  The effects are as follows:
+  1. **All Same Suit**: The effect or damage of the specified suit is multiplied (multiplier: **5**).
+  2. **Two Same Suits**: The base effect or damage is multiplied (multiplier: **3**).
+  3. **All Different Suits**: The base effect or damage is multiplied (multiplier: **2**).
+- **Non-Sequential Ranks (e.g., 1-3-5 or 2-4-6)**
+  There are five possible suit combinations:
+  1. First and last cards have the same suit.
+  2. First and middle cards have the same suit.
+  3. Middle and last cards have the same suit.
+  4. All suits are different.
+  5. All suits are the same.
+
+  The effects are as follows:
+  1. **First and Last Same Suit**: 
+     Deal damage or apply the effect twice when played and at the end of the turn. Additionally, an extra effect or damage based on the middle card's suit is triggered once (multiplier: **1**). If the effect cannot stack, it is applied only once.
+  2. **First and Middle Same Suit**: 
+     Deal damage or apply the effect twice when played (calculated as above), and once at the end of the turn (multiplier: **1**).
+  3. **Middle and Last Same Suit**: 
+     Deal damage or apply the effect once for the first card's suit when played (calculated as above), and twice at the end of the turn (multiplier: **1**).
+  4. **All Different Suits**: 
+     The effect of the suit with the highest card rank is applied (multiplier: **2**).
+  5. **All Same Suit**: 
+     The base effect or damage is multiplied (multiplier: **3**).
+
+### Four-of-a-Kind (Four Cards in Sequence)
+- For **sequential ranks**, the effects are similar to three-of-a-kind but with different multipliers. Additional cases include:
+  1. **Two Pairs of Same Suits**: 
+     Apply both types of damage or effects simultaneously (multiplier: **2** for each).
+  2. **Two Cards Same Suit, Other Two Different Suits**: 
+     Apply the effect for the matching suit (multiplier: **2**), then apply the effect for the suit with the higher rank (multiplier: **1**).
+
+  For similar combinations, the multipliers are as follows:
+  1. **All Same Suit**: Multiplier **7**.
+  2. **Majority Suit (3 out of 4 cards)**: Multiplier **5**.
+  3. **All Different Suits**: Multiplier **3**.
+
+### Five-of-a-Kind (Sequential Only)
+Five-card combinations are the most special, designed for pursuing extreme values. There are two cases:
+1. **Not All Same Suit**: 
+   The base effect or damage is multiplied (multiplier: **10**). If there are repeated suits, the effect is based on the most common suit. If no suits are repeated, the effect is based on the suit of the highest-ranking card.
+2. **All Same Suit (Straight Flush)**: 
+   The base effect or damage is multiplied (multiplier: **20**).
+
+:::tip[Note]
+Due to the high damage potential, the multipliers are set very high, and the mechanics are designed to be difficult to trigger.
+:::
+
+## Game Rules
+At the start of each round, the player draws 5 random cards as their starting hand. The maximum number of cards in hand is 5 (excluding wild cards or jokers). During their turn, the player can play multiple cards (including wild cards and jokers), and the number of cards played in a single turn can exceed 5.
+
+At the beginning of each turn, the player draws cards from the deck. If the deck has fewer than 5 cards remaining, the remaining cards are drawn, the deck is reshuffled, and the new deck excludes any cards already in the player's hand. The remaining cards form the new deck.
+
+During their turn, the player can organize and play their hand in any order they desire. They can also choose to retain some or all of their cards.
+
+After the player's turn, the enemy takes their turn, using one of their skills. This continues until the enemy is defeated or the player dies.
+
+## Enemy Behavior
+Enemies have an **intent system** (which informs the player of the enemy's next action). Standard enemies (normal monsters) have the following behaviors:
+1. **Attack**
+2. **Defend**
+3. **Effect** (Apply a debuff to the player)
+4. **Flee**
+
+Elite enemies and bosses have additional unique behaviors:
+1. **Curse** (e.g., preventing the player from drawing Spades (♠️) for the next few turns)
+2. **Summon**
+3. **Charge** (Prepare for a heavy attack that deals massive damage, requiring multiple turns of inaction)
+
+## Map
+The game map is a tree structure where each node is connected by at least one path. The starting node has three paths, each leading to a final **Boss Node**. The Boss Node converges all separated paths and does not branch out further (endpoint).
+
+The map consists of 10 layers (including the starting node), with the 11th layer being the **Boss Battle**. Players can see the entire map and its paths, allowing them to plan their route (similar to *Slay the Spire*).
+
+Map paths work as follows:
+- Apart from the starting node and the Boss Battle, other nodes can have one or more entry points and one or more exit points.
+- If a node has two paths, it could either:
+  - Branch into two separate paths.
+  - Have one path leading to the next node in the current route and another path allowing a transition to a node in a neighboring route.
+
+:::warning[Forbidden Situation]
+Nodes **cannot** connect to nodes from the previous layer. They can **only** connect to nodes from the next layer, including transition routes.
+:::
+
+## Overall Style
+The game aims for a whimsical, humorous, and fairy-tale-like experience. The atmosphere should be lighthearted, with a bright and cute art style (without being overly complex, similar to *Dicey Dungeons*).
+
+The player character is envisioned as a **paper-crafted kingdom knight** (inspired by *Paper Mario*). The knight wields a silver one-handed sword, striking a majestic pose with the sword raised high.
+
+For gameplay inspiration, refer to *SpringBlades* by Sockpops, a fun and engaging game worth trying out!
