@@ -1,0 +1,8 @@
+{
+  "label": "CSV 转 ScriptableObject 工作流",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "在 Unity 中使用 CSV 文件来创建 ScriptableObject 的工作流程，包括通过代码导出每个Sheet的数据，单个Sheet转换成Unity Mono类，以及最后以Mono类转换成ScriptableObject的步骤。"
+  }
+}

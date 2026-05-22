@@ -1,0 +1,8 @@
+{
+  "label": "使用手册",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "一些工具的使用说明和注意事项的整理"
+  }
+}
