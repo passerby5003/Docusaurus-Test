@@ -1,0 +1,79 @@
+---
+sidebar_position: 2
+description: ObjectPool Usage
+---
+
+# ObjectPool Usage
+
+Above, we introduced the concept of object pooling and its usage. Hopefully, you have a basic understanding. Next, let's explore how to use the `ObjectPooling.cs` in Unity.
+
+First, confirm that the objects you need to use requires object pooling. Once you've confirmed the need for high-frequency usage, you can proceed with the following steps.
+
+## Create Your Object Pool GameObject
+
+Typically, the method to generate objects is as follows:
+
+```csharp title="SpawnExample.cs"
+    Instantiate(obj, position, rotation, parent);
+```
+
+Here, `obj` represents the object to be instantiated, `position` represents the spawn position, `rotation` represents the spawn rotation, and `parent` represents the parent object.
+
+To use the object pool, change the method to:
+
+```csharp title="SpawnExample.cs"
+    ObjPooling.SpawnObject(obj, position, rotation, PoolType.GameObject);
+```
+
+After this, check the **Hierarchy** window. You will see that under `Object Pooler - GameObject Pool`, a specified object has been added. This object is now managed by the object pool. When more objects are added, the object pool will expand. However, when objects are recycled (previously, they were directly destroyed), calling `SpawnObject` again will reuse the recycled objects instead of instantiating new ones. This is how the object pool works!
+
+Of course, besides `GameObject`, there are other categories. For details, see [Object Categories in ObjPooling](#objpooling-object-categories).
+
+## Recycle Your Object Pool GameObject
+
+Similarly, the recycling method replaces the previous direct destruction method.
+Without an object pool, the method to directly destroy an object is as follows:
+
+```csharp title="SpawnExample.cs"
+    Destroy(obj);
+```
+
+Although it seems simple, Unity performs many operations in the background, including but not limited to:
+- Unloading models
+- Releasing material references
+- Removing colliders
+- Calling the `OnDestroy()` method of attached scripts
+
+Thus, when a large number of such objects appear, destroying them one by one can be costly. Now, let's look at the recycling method with the object pool:
+
+```csharp title="SpawnExample.cs"
+    ObjPooling.ReturnToPool(obj);
+```
+
+It looks similar, but the overhead is significantly reduced. Specifically, the steps of **releasing material references** and **removing colliders** are eliminated, saving a lot of valuable time and reducing lag.
+
+:::warning[Important Note]
+Since `Destroy` is no longer called directly, the `OnDestroy` method should now be placed in the `OnDisable` method to ensure it takes effect.
+:::
+
+## ObjPooling Object Categories
+
+- GameObject
+- Audio
+- Visual Effect (FX)
+- UI
+
+## Unity Generic Object Pool Principle
+
+To manage multiple types of object pools, Unity's built-in `Pool` is used here. This ensures compatibility with Unity while controlling various types of objects. Since all these objects are `GameObject` types, a dictionary (`Dictionary`) is used to manage all objects. The dictionary contains a reference to the object itself as the **Key** and an object pool as the **Value** to establish the correspondence.
+
+```csharp title="Pooling.cs"
+    private Dictionary<GameObject, ObjPool<GameObject>> pool = new();
+```
+
+When the **Key** index is not found, it means a new object needs to be added to the object pool. A new `Pool` is created, and a correspondence between the instantiated object and the original object template is added. This acts as a bridge between the instantiated object and the object pool, avoiding hard associations between them.
+
+When recycling an object, the dictionary is used to reverse-search for the object pool, and then the object is released (`Release`) from the pool. When the object needs to be completely destroyed or exceeds the object pool's capacity limit, the method specified in `ActionOnDestroy` is called to destroy the object.
+
+Although destruction operations still exist, the performance overhead of the object pool mainly lies in the initialization and creation of objects, as well as overload recycling or manual clearing (`Clear`). By reducing direct object instantiation and destruction, performance can be significantly improved.
+

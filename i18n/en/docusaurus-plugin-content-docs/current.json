@@ -3,22 +3,6 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.Tutorial - Basics": {
-    "message": "Tutorial - Basics",
-    "description": "The label for category 'Tutorial - Basics' in sidebar 'tutorialSidebar'"
-  },
-  "sidebar.tutorialSidebar.category.Tutorial - Basics.link.generated-index.description": {
-    "message": "5 minutes to learn the most important Docusaurus concepts.",
-    "description": "The generated-index page description for category 'Tutorial - Basics' in sidebar 'tutorialSidebar'"
-  },
-  "sidebar.tutorialSidebar.category.Project description": {
-    "message": "Project description",
-    "description": "The label for category 'Project description' in sidebar 'tutorialSidebar'"
-  },
-  "sidebar.tutorialSidebar.category.Project description.link.generated-index.description": {
-    "message": "Learn how to write a good project description and README file.",
-    "description": "The generated-index page description for category 'Project description' in sidebar 'tutorialSidebar'"
-  },
   "sidebar.tutorialSidebar.category.UI": {
     "message": "UI",
     "description": "The label for category 'UI' in sidebar 'tutorialSidebar'"
@@ -34,5 +18,29 @@
   "sidebar.tutorialSidebar.category.API 文档.link.generated-index.description": {
     "message": "Here is the general API documentation for my Unity project, which includes detailed explanations and usage methods for various utility classes and framework classes I have developed. Whether you are a beginner or an experienced developer, these documents will help you better understand and use the APIs of the frameworks I have developed, improving your development efficiency and code quality.",
     "description": "The generated-index page description for category 'API 文档' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.使用手册": {
+    "message": "User Manual",
+    "description": "The label for category '使用手册' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.使用手册.link.generated-index.description": {
+    "message": "User guide for tools and important notes",
+    "description": "The generated-index page description for category '使用手册' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.CSV 转 ScriptableObject 工作流": {
+    "message": "CSV to ScriptableObject workflow",
+    "description": "The label for category 'CSV 转 ScriptableObject 工作流' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.CSV 转 ScriptableObject 工作流.link.generated-index.description": {
+    "message": "The workflow for creating ScriptableObjects from CSV files in Unity, including exporting data from each sheet, converting individual sheets to Unity MonoBehavior classes, and finally converting these classes to ScriptableObjects.",
+    "description": "The generated-index page description for category 'CSV 转 ScriptableObject 工作流' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.泛用对象池": {
+    "message": "Generic Object Pool",
+    "description": "The label for category '泛用对象池' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.泛用对象池.link.generated-index.description": {
+    "message": "Documentation for the generic object pool, explaining its usage and underlying principles.",
+    "description": "The generated-index page description for category '泛用对象池' in sidebar 'tutorialSidebar'"
   }
 }

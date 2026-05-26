@@ -1,0 +1,34 @@
+---
+sidebar_position: 1
+description: Dynamic Object Pool Class Introduction
+---
+
+# Dynamic Object Pool Class Introduction
+
+This object pool is an extension based on ``UnityEngine.Pool``. It supports object pools for various types of objects and can categorize them based on different parameters provided by the calling methods.
+
+## What is an Object Pool?
+
+Object Pool (Object Pool) is a design pattern used for resource management and scheduling[^1]. It can easily manage types that require frequent creation and deletion. It is a concept of **trading memory for time**.
+Frequently creating objects often brings significant performance overhead. Over time, you'll notice that memory consumption grows and the program runs slower. This is due to the performance cost and memory allocation issues caused by frequent object creation and destruction. If you encounter this problem, *using an object pool will solve it*!
+
+## Why Use Object Pool in Unity?
+
+In traditional C# or Java development, object pools are most frequently used for HTTP requests or high-overhead multithreading (or high concurrency scenarios), where there's a need to efficiently manage all requests or threads. This led to the creation of specialized object pools for request types - thread pools (Threading Pool).
+Objects in Unity are no longer just simple classes (of course, objects can also be called classes, but they are classes based on `UnityEngine.Object`). Instead, they are collections of scripts and components. Therefore, they require more reasonable management and allocation. Thus, object pooling is a technology commonly used in game development[^2].
+
+## When Should You Use Object Pool in Unity?
+
+Object pools have both advantages and disadvantages. Since they follow the principle of ***trading memory for time***, each object pool consumes a significant amount of memory. Therefore, they should only be used for objects that require frequent creation, such as:
+- Temporary GameObjects, such as bullets, decal planes, etc.
+- Visual effects, such as bullet tracer effects
+- UI elements, such as leaderboard prefabs after loading data
+
+Objects suitable for object pooling have the following characteristics:
+- Consistent appearance (you wouldn't have a bullet that starts as a golden pointed shape and then turns into an orange cube)
+- Appear multiple times in the game and are frequently created and destroyed
+- Weak association with external scenes, not forcing dependence on scripts or objects that exist only in specific scenes
+
+### References:
+[^1]: Object Pool concept: [Zhihu](https://zhuanlan.zhihu.com/p/108538606)
+[^2]: Object Pools in Unity (Although TuanJie Engine SUCKS 🤮, the principle is correct): [CN Documentation](https://developer.unity.cn/projects/63c5ef23edbc2a001bfd6e34)

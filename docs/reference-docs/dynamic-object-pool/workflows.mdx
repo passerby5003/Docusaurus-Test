@@ -1,0 +1,79 @@
+---
+sidebar_position: 2
+description: ObjectPool使用方法
+---
+
+# ObjectPool使用方法
+
+上面我们介绍了对象池的概念和使用方法，相信你已经有了一个初步的了解，接下来，我们来看在Unity中，我所使用的 `ObjectPooling.cs` 的使用方法。
+
+首先，确定你所需要使用的物体要用到对象池。确认了需要高频使用后，那就可以开始下面的步骤了。
+
+## 创建你的对象池GameObject
+
+一般我们生成物体的方法都是如下代码：
+
+```csharp title="SpawnExample.cs"
+    Instantiate(obj, position, rotation, parent);
+```
+
+其中，obj代表需要生成的物体的位置，rotation代表生成物体的旋转，parent代表生成物体的父级物体。
+
+若要使用对象池，使用方法则要改成：
+
+```csharp title="SpawnExample.cs"
+    ObjPooling.SpawnObject(obj, position, rotation, PoolType.GameObject);
+```
+
+之后，在Hierachy中查看，可以发现在 `Object Pooler - GameObject Pool` 下，增加了一个指定的Object，这样子，这个物体就受到了对象池的管辖，之后再增加物体会让对象池扩张，但物体回收（之前是直接销毁）之后，再次调用SpawnObject会发现，之前回收的物体回到了场景中，且没有额外Instantiate新的物体。那么，对象池便成功实现了！
+
+当然，除了GameObject之外，还有其他的分类，具体详见[ObjPooling中的物体分类](#objpooling中的物体分类)。
+
+## 回收你的对象池GameObject
+
+同样，回收方法也代替了以前的直接销毁。  
+不使用对象池的情况下，直接销毁物体的方法如下所示：
+
+```csharp title="SpawnExample.cs"
+    Destroy(obj);
+```
+
+虽然看似简单，但实际上Unity会在其中做很多处理，包括但不限于：
+- 卸载模型
+- 解开材质引用
+- 移除碰撞体
+- 调用挂载脚本的OnDestroy()方法
+
+因此，在大量类似的物体出现后，逐一销毁的开销并不低。现在，我们看一下使用对象池之后的回收方式：
+
+```csharp title="SpawnExample.cs"
+    ObjPooling.ReturnToPool(obj);
+```
+
+看起来很相似，但是开销能少不少。就上述步骤来说，就少了 ***解开材质引用*** 和 ***移除碰撞体*** 两个步骤，可以省下不少宝贵的时间，减少卡顿的现象出现。
+
+:::warning[需要注意的小问题]
+因为不再直接调用Destroy了，之前的`OnDestroy`在移到对象池后，要放在`OnDisable`方法中才会生效了。
+:::
+
+## ObjPooling中的物体分类
+
+- GameObject 
+- Audio
+- Visual Effect (FX)
+- UI
+
+## Unity泛用对象池原理
+
+因为需要管理多种不同用途的对象池，因此这里采用了Unity自带的Pool进行管理，既能保证兼容Unity，又能控制多种不同的用途的物体。  
+然后，由于这些所有的对象都属于GameObject，因此这里采用了一套字典(Dictionary)管理所有的物体。字典中包含了一个物体本身的引用作为Key，一个对象池作为Value，来组成对应关系。  
+
+```csharp title="Pooling.cs"
+    private Dictionary<GameObject, ObjPool<GameObject>> pool = new();
+```
+
+当发现Key的索引没有找到时，即为收到了新物体需要做成对象池，因此会创建一个Pool。创建了Pool之后，会添加一个已经生成的物体和物体的原型模板的对应关系，作为已生成物体和对象池之间的桥梁，避免两者硬关联。 
+
+回收物体时，会通过这个桥梁字典，反向搜索对象池，然后从对象池里释放(Release)对象。当需要彻底销毁物体或者超出对象池承载上限时，便会调用ActionOnDestroy中指定好的方法，对物体进行销毁。
+
+虽然都有销毁操作，但是对象池的性能开销主要集中在对象的初始化创建和过载回收或手动清除(Clear)上。通过减少直接操作物体生成和销毁，可以明显增加性能。

@@ -1,0 +1,8 @@
+{
+  "label": "泛用对象池",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "泛用对象池的说明文档，讲解了对象池的使用方法和部分原理。"
+  }
+}

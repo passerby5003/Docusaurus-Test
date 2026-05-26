@@ -1,0 +1,21 @@
+---
+sidebar_position: 1
+description: Workflow intro
+---
+
+# Workflow Introduction
+
+This workflow reads Excel spreadsheets to export data from each Sheet, then imports each Sheet individually into Unity to generate classes, and finally creates ScriptableObjects (SO) containing the required data in the form of data classes.  
+Features:
+- Excel files are converted to CSV, ensuring data integrity while making each Sheet's data lightweight.
+- Unity-friendly: CSV files can be directly viewed in the Unity Editor.
+- Supports multiple data types, including `int`, `float`, `bool`, `enum`, etc.
+
+## Future Updates and Expansions
+
+Although the workflow for reading Excel tables into Unity has been implemented, there are still areas for optimization. For example:
+- Currently, only CSV to ScriptableObject (SO) conversion is supported; JSON cannot be processed directly.
+- Tables cannot be converted to JSON for use.
+- Data formats require strict adherence.
+
+These are critical issues that need to be addressed. In future updates, I will strive to add these new features.
